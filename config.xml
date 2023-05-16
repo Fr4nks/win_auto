@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	{name} = client name. Genhire field Company/Name
+
+	{invoice_numb} = invoice number.
+	{invoice} = singular/plural of the word: invoice/invoices
+	{faktuur} = singular/plural of the word: faktuur/fature
+	
+	{contract_numb} = contract number.
+	{contract} = singular/plural of the word: invoice/invoices
+	{kontrak} = singular/plural of the word: faktuur/fature
+
+	{container} = singular/plural of the word: container/containers
+	{kontrak} = singular/plural of the word: kontrak/kontrakte
+	{container number} = all container numbers on contract 23, 45 & 56
+	{numb_cont} = number of containers on contract
+
+	{groet} = more/middag
+	{greeting} = morning/afternoon
+
+
+-->
+<data>
+	<login>
+		<name>FR</name>
+		<password>FRA</password>
+	</login>
+	<statement>
+		<months>1</months>
+		<rollback>0</rollback>
+	</statement>
+	<email>
+		<template type="normal" language="afrikaans">
+			<subject>Hire Centre | STAAT  {FAKTUUR}: {invoice_numb}.</subject>
+			<body><![CDATA[<i>{name}</i><br>Vind asseblief die aangehegte staat en {word_faktuur}: {invoice}.<br><br>]]></body>
+		</template>
+		<template type="normal" language="english">
+			<subject>Hire Centre | STATEMENT  {INVOICE}: {invoice_numb}.</subject>
+			<body><![CDATA[<i>{name}</i><br>Please find the attached {word_invoice}: {invoice} for container hire {month}.<br><br>]]></body>
+		</template>
+		<template type="container" language="afrikaans">
+			<subject>Hire Centre | {CONTAINER}: {container_numb} {maand}.</subject>
+			<body><![CDATA[<i>{name}</i><br>Vind asseblief die aangehegte {word_faktuur}: {invoice} vir container: {container_numbers} huur {translate(month)}.<br><br></body>]]></body>
+		</template>
+		<template type="container" language="english">
+			<subject>Hire Centre | {CONTAINER}: {container_numb} {month}.</subject>
+			<body><![CDATA[<i>{name}</i><br>Please find the attached {word_faktuur}: {invoice} for container: {container_numbers} rental {translate(month)}.<br><br>]]></body>
+		</template>
+		<template type="personal" language="afrikaans">
+			<subject>Hire Centre | STAAT  {FAKTUUR}: {invoice_numb}.</subject>
+			<body><![CDATA[<i>{translate(greeting)}{name}</i><br>Vind asseblief die aangehegte staat en {word_faktuur}: {invoice}.<br><br>]]></body>
+		</template>
+		<template type="personal" language="english">
+			<subject>Hire Centre | STATEMENT  {FAKTUUR}.: {invoice_numb}.</subject>
+			<body><![CDATA[<i>{greeting}{name}</i><br>Please find the attached {invoice}: {invoice_numb} for container hire {month}.<br><br>]]></body>
+		</template>
+		<template type="account" language="afrikaans">
+			<subject>Hire Centre | STAAT  {word_faktuur.upper()}: {invoice}.</subject>
+			<body><![CDATA[<i>{name}</i><br>Vind asseblief die aangehegte staat en {faktuur}: {invoice_numb}.<br><br>]]></body>
+		</template>
+		<template type="account" language="english">
+			<subject>Hire Centre | STATEMENT  {word_invoice.upper()}.: {invoice}.</subject>
+			<body><![CDATA[<i>{name}</i><br>Please find the attached {invoice}: {invoice_numb} for container hire {month}.<br><br>]]></body>
+		</template>	
+	</email>
+</data>

@@ -1,0 +1,9 @@
+alembic/
+env/
+dist/
+build/
+dist.rar
+*.spec
+__pycache__/
+*.FDB
+config.py
