@@ -7,15 +7,10 @@ warnings.filterwarnings("ignore", message="32-bit application should be automate
 with open('settings.json') as f:
     settings = json.load(f)
 
-genhire = settings['genhire']
-name = settings['name']
-password = settings['password']
-app = Application(backend="win32").start(genhire)
-app.TfmLogin.set_focus()
+app = Application(backend="win32").start(settings['genhire'])
 app.TfmLogin.TBtnWinControl2.click()
-app.TwwLookupDlg.TwwIncrementalSearch1.set_focus()
-app.TwwLookupDlg.TwwIncrementalSearch1.type_keys(name+'{ENTER}')
-app.TfrmLogin.TEdit1.type_keys(password+'{ENTER}')
+app.TwwLookupDlg.TwwIncrementalSearch1.type_keys(settings['name']+'{ENTER}')
+app.TfrmLogin.TEdit1.type_keys(settings['password']+'{ENTER}')
 
 
 

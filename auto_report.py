@@ -63,20 +63,9 @@ def task_input(task=None):
 
 def login(app, name, password):
     try:
-        app.TfmLogin.set_focus()
         app.TfmLogin.TBtnWinControl2.click()
-        app.TwwLookupDlg.wait('visible', timeout=5)
-        app.TwwLookupDlg.TwwIncrementalSearch1.set_focus()
-        #app.TwwLookupDlg.TwwIncrementalSearch1.send_chars('{BACKSPACE}{BACKSPACE}{BACKSPACE}{BACKSPACE}')
-        app.TwwLookupDlg.TwwIncrementalSearch1.type_keys('{DOWN}')
-        app.TwwLookupDlg.TwwIncrementalSearch1.type_keys('{DOWN}')
-        app.TwwLookupDlg.TwwIncrementalSearch1.type_keys('{DOWN}')
-        app.TwwLookupDlg.TBitBtn2.click()
-
-
-        app.TfrmLogin.wait('visible', timeout=5)
-        app.TfrmLogin.TEdit1.type_keys(password)
-        app.TfrmLogin.TBitBtn2.click()
+        app.TwwLookupDlg.TwwIncrementalSearch1.type_keys(settings['name']+'{ENTER}')
+        app.TfrmLogin.TEdit1.type_keys(settings['password']+'{ENTER}')
     except:
         print('Genhire already open')
 
