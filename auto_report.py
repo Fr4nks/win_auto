@@ -6,6 +6,8 @@ from datetime import datetime
 from datetime import timedelta
 import tkinter as tk
 
+import warnings
+warnings.filterwarnings("ignore", message="32-bit application should be automated using 32-bit Python")
 
 
 # get last month
@@ -64,8 +66,9 @@ def task_input(task=None):
 def login(app, name, password):
     try:
         app.TfmLogin.TBtnWinControl2.click()
-        app.TwwLookupDlg.TwwIncrementalSearch1.type_keys(settings['name']+'{ENTER}')
-        app.TfrmLogin.TEdit1.type_keys(settings['password']+'{ENTER}')
+        app.TwwLookupDlg.wait('visible', timeout=5)
+        app.TwwLookupDlg.TwwIncrementalSearch1.type_keys(name+'{ENTER}')
+        app.TfrmLogin.TEdit1.type_keys(password+'{ENTER}')
     except:
         print('Genhire already open')
 
@@ -95,18 +98,16 @@ def connect_genhire():
         print('Genhire failed to open')
 
 def repair(app, client):
-    app.Tfmain.TLMDPageControl.UtilitiesTLMDTabSheet.click()
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    app.Tfmain.TLMDPageControl.child_window(title="Company Details").click_input()
+    app.Tfmain.TLMDPageControl.click_input(coords = (701, 10))
+    app.Tfmain.TLMDPageControl.click_input(coords = (36, 40))
     app.TfrmCompany.TLMDPageControl1.click_input(coords = (546, 15))
-    # ADDITIONAL DETAILS
-    app.TfrmCompany.TBitBtn2.click()
-    app.TfrmInvRepair.TBtnWinControl1.click()
-    app.TwwLookupDlg.TwwIncrementalSearch1.type_keys(client)
-    app.TwwLookupDlg.TBitBtn2.click()
-    app.TfrmInvRepair.TBitBtn3.click()
-    app.TMessageForm.TButton2.click()
-    app.TfrmCompany.TBitBtn5.click()
+    app.TfrmCompany.TBitBtn2.click() #Repair Invoice Calculation
+    app.TfrmInvRepair.TBtnWinControl1.click() 
+    app.TwwLookupDlg.TwwIncrementalSearch1.type_keys(client+"{ENTER}")
+    app.TfrmInvRepair.TBitBtn3.click() #Invoice Repair | OK
+    app.TMessageForm.TButton2.click() #POPUP | Are you sure you wish to Repair all invoices [YES].
+    app.TfrmInvRepair.wait_not('visible', timeout=3600000000)
+    app.TfrmCompany.TBitBtn4.click()
     
 def exit_this(app):
     app.Find.Close.Click()
@@ -177,23 +178,22 @@ if task == 's':
     app = connect_genhire()
     statement(app, client)
 elif task == 'r':
+    app = connect_genhire()
     if " " in client:
         client = client.split()
         for i in client:
-            app = connect_genhire()
             repair(app, i)
-            app = connect_genhire()
     else:
-        app = connect_genhire()
         repair(app, client)
-        app = connect_genhire()
 
-    app = connect_genhire()
-    repair(app, client)
+    app.Tfmain.TBitBtn2.click()
+    app.TMessageForm.TButton1.click()
     app = connect_genhire()
 elif task == 'a':
     app = connect_genhire()
     repair(app, client)
+    app.Tfmain.TBitBtn2.click()
+    app.TMessageForm.TButton1.click()
     app = connect_genhire()
     statement(app, client)
 elif task == 't':

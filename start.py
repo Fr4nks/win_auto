@@ -9,6 +9,7 @@ with open('settings.json') as f:
 
 app = Application(backend="win32").start(settings['genhire'])
 app.TfmLogin.TBtnWinControl2.click()
+app.TwwLookupDlg.wait('visible', timeout=5)
 app.TwwLookupDlg.TwwIncrementalSearch1.type_keys(settings['name']+'{ENTER}')
 app.TfrmLogin.TEdit1.type_keys(settings['password']+'{ENTER}')
 
